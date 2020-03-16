@@ -1,11 +1,16 @@
 package com.examen.fi.RestHumanTech.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "peliculas")
 public class Pelicula implements Serializable {
 	
 	@Id
@@ -21,10 +26,8 @@ public class Pelicula implements Serializable {
 	@JsonIgnore
 	private Estado estado;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cod_turno")
-	@JsonIgnore
-	private Turno turno;
+	@OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Intermedio> intermedio = new ArrayList<>();	
 
 	public Integer getId() {
 		return id;
@@ -57,13 +60,13 @@ public class Pelicula implements Serializable {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-
-	public Turno getTurno() {
-		return turno;
+	
+	public List<Intermedio> getIntermedio() {
+		return intermedio;
 	}
 
-	public void setTurno(Turno turno) {
-		this.turno = turno;
+	public void setIntermedio(List<Intermedio> intermedio) {
+		this.intermedio = intermedio;
 	}
 
 }

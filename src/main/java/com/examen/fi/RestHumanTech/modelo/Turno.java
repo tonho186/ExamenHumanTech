@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "turno")
 public class Turno implements Serializable {
 	
@@ -25,7 +26,7 @@ public class Turno implements Serializable {
 	private Estado estado;
 	
 	@OneToMany(mappedBy = "turno", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Pelicula> pelicula = new ArrayList<>();
+    private List<Intermedio> intermedio = new ArrayList<>();	
 
 	public Integer getId() {
 		return id;
@@ -51,13 +52,13 @@ public class Turno implements Serializable {
 		this.estado = estado;
 	}
 
-	public List<Pelicula> getPelicula() {
-		return pelicula;
+	public List<Intermedio> getIntermedio() {
+		return intermedio;
 	}
 
-	public void setPelicula(List<Pelicula> pelicula) {
-		this.pelicula = pelicula;
-	}
+	public void setIntermedio(List<Intermedio> intermedio) {
+		this.intermedio = intermedio;
+	}	
 	
 	
 

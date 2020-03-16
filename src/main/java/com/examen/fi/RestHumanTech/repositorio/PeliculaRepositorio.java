@@ -10,5 +10,4 @@ import com.examen.fi.RestHumanTech.modelo.Pelicula;
 @Repository
 public interface PeliculaRepositorio extends JpaRepository<Pelicula, Integer> {
 	Page<Pelicula> findByEstadoId(Boolean estadoId, Pageable pageable);
-    Page<Pelicula> findByTurnoId(Integer turnoId, Pageable pageable);
 }

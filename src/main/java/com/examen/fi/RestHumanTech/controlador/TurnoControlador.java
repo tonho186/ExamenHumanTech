@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.examen.fi.RestHumanTech.exception.ResourceNotFoundException;
 import com.examen.fi.RestHumanTech.modelo.Turno;
 import com.examen.fi.RestHumanTech.repositorio.EstadoRepositorio;
+import com.examen.fi.RestHumanTech.repositorio.IntermedioRepositorio;
 import com.examen.fi.RestHumanTech.repositorio.PeliculaRepositorio;
 import com.examen.fi.RestHumanTech.repositorio.TurnoRepositorio;
 
@@ -30,8 +31,8 @@ public class TurnoControlador {
 	@Autowired
     TurnoRepositorio turnoRepositorio;
     
-    @Autowired
-    PeliculaRepositorio peliculaRepositorio;
+	@Autowired
+    IntermedioRepositorio intermedioRepositorio;
     
     @Autowired
     EstadoRepositorio estadoRepositorio;
@@ -62,8 +63,8 @@ public class TurnoControlador {
         return turnoRepositorio.findByEstadoId(estadoId, pageable);
         }
 
-    @PutMapping("/estado/{codEstado}/turno/{turnoId}")
-    public Turno updateTurno(@PathVariable (value = "codEstado") Boolean codEstado,@PathVariable(value = "turnoId") Integer turnoId,
+    @PutMapping("/estado/{codEstado}/turno/{id}")
+    public Turno updateTurno(@PathVariable (value = "codEstado") Boolean codEstado, @PathVariable(value = "id") Integer turnoId,
                                             @Valid @RequestBody Turno nuevoTurno) {
 
     	if(!estadoRepositorio.existsById(codEstado)) {
